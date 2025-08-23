@@ -1,0 +1,101 @@
+{
+  "name": "esign-ts",
+  "version": "1.0.0",
+  "description": "A comprehensive TypeScript SDK for Indonesian e-signature services with type-safe validation schemas and client implementations for both API v1 and v2.",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/mikeyxmomo/esign-ts#readme",
+  "bugs": {
+    "url": "https://github.com/mikeyxmomo/esign-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeyxmomo/esign-ts.git"
+  },
+  "author": "mikeyxmomo",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "esign",
+    "e-signature",
+    "digital-signature",
+    "indonesia",
+    "typescript",
+    "pdf",
+    "validation",
+    "valibot",
+    "api-client",
+    "certificate"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./client": {
+      "import": "./dist/client/index.js",
+      "types": "./dist/client/index.d.ts"
+    },
+    "./schemas": {
+      "import": "./dist/schemas/index.js",
+      "types": "./dist/schemas/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown --minify",
+    "build:dev": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts --fix",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.md\"",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "release": "bumpp && npm publish",
+    "release:patch": "bumpp patch && npm publish",
+    "release:minor": "bumpp minor && npm publish",
+    "release:major": "bumpp major && npm publish"
+  },
+  "devDependencies": {
+    "@types/node": "^22.17.2",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/ui": "^3.2.4",
+    "bumpp": "^10.2.3",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "tsdown": "^0.14.1",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11"
+  ],
+  "dependencies": {
+    "valibot": "^1.1.0"
+  }
+}
