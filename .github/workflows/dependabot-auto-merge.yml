@@ -1,0 +1,46 @@
+name: Dependabot Auto-merge
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge Dependabot PRs
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run build
+        run: npm run build
+
+      - name: Auto-merge minor/patch updates
+        if: success()
+        run: |
+          if [[ "${{ github.event.pull_request.title }}" =~ ^Bump.*from.*to.*(patch|minor) ]]; then
+            echo "Auto-merging minor/patch dependency update"
+            gh pr merge ${{ github.event.pull_request.number }} --auto --squash
+          else
+            echo "Major update detected, manual review required"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
