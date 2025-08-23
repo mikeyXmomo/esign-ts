@@ -1,6 +1,6 @@
 {
   "name": "esign-ts",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A comprehensive TypeScript SDK for Indonesian e-signature services with type-safe validation schemas and client implementations for both API v1 and v2.",
   "type": "module",
   "license": "MIT",
@@ -14,7 +14,10 @@
   },
   "author": "mikeyxmomo",
   "files": [
-    "dist"
+    "dist/index.js",
+    "dist/index.d.ts",
+    "README.md",
+    "LICENSE"
   ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -59,7 +62,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown --minify",
+    "build": "tsdown --minify && node scripts/optimize-types.js",
     "build:dev": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
@@ -69,11 +72,13 @@
     "lint": "eslint src --ext .ts --fix",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.md\"",
     "clean": "rm -rf dist",
-    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepublishOnly": "npm run clean && npm run build && npm run test && node scripts/create-minimal-package.js",
+    "postpublish": "node scripts/restore-readme.js",
     "release": "bumpp && npm publish",
     "release:patch": "bumpp patch && npm publish",
     "release:minor": "bumpp minor && npm publish",
-    "release:major": "bumpp major && npm publish"
+    "release:major": "bumpp major && npm publish",
+    "check:publish": "node scripts/check-publish-ready.js"
   },
   "devDependencies": {
     "@types/node": "^22.17.2",

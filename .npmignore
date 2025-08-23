@@ -1,0 +1,57 @@
+# Source files
+src/
+tests/
+scripts/
+
+# Development files
+*.config.ts
+*.config.js
+.github/
+.git/
+.gitignore
+
+# Documentation (except README.md)
+PUBLISHING.md
+CONTRIBUTING.md
+API.md
+
+# Large documentation files
+*.md
+!README.md
+
+# Package preparation files
+README.full.md
+README.npm.md
+**/README.full.md
+**/README.npm.md
+
+# Development dependencies
+node_modules/
+.npm/
+
+# Build artifacts (except dist/)
+*.tgz
+coverage/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
